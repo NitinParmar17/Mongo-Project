@@ -3,6 +3,8 @@ const mongo = require('mongodb');
 const { MongoClient } = require('mongodb');
 const app = express();
 
+const { getAPIData } = require('./src/page-data.js');
+
 // Connection URL
 const url = 'mongodb://localhost:27017/'; // Replace with your MongoDB connection string
 
@@ -13,27 +15,15 @@ const collectionName = 'content';
 // Create a new MongoClient
 const client = new MongoClient(url);
 
-// Connect to the MongoDB server
-// client.connect((err) => {
-//     if (err) {
-//         console.error('Error connecting to MongoDB:', err);
-//         return;
-//     }
-
-//     // Connected successfully
-//     console.log('Connected to MongoDB');
-
-//     // Access the database
-//     const db = client.db(dbName);
-//     const collection = db.collection(collectionName);
-
-//     // Perform database operations here
-//     // var result = db.coll
-//     // Close the connection
-//     client.close();
-// });
 async function runQuery() {
     try {
+        const apiLink = 'https://jsonplaceholder.typicode.com/todos';
+        getAPIData(apiLink)
+            .then((data) => {
+                console.log(data); // Received data from data.js
+            }).catch((error) => {
+                console.error('Error retrieving data:', error);
+            });
 
         // Connect to the MongoDB server
         // await client.connect();
