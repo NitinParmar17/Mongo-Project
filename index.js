@@ -62,7 +62,7 @@ async function runQuery() {
             console.log(remove);
         }
 
-        console.log('Query result:', deleteData);
+        console.log('result:', deleteData);
     } catch (err) {
         console.error('Error running query:', err);
     } finally {
